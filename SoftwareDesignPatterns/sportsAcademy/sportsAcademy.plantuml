@@ -1,0 +1,90 @@
+@startuml
+
+title __SPORTSACADEMY's Class Diagram__\n
+
+skinparam classAttributeIconSize 0
+
+        class access.EnterGym {
+                + useGym()
+         }
+
+
+
+
+            class access.EnterPool {
+                + usePool()
+      }
+
+
+
+            interface access.GymAccess {
+                {abstract} + useGym()
+            }
+
+
+
+
+            class access.NoGymEntry {
+                + useGym()
+            }
+
+
+
+
+            class access.NoPoolEntry {
+                + usePool()
+            }
+
+
+
+
+            interface access.PoolAccess {
+                {abstract} + usePool()
+            }
+
+
+  
+
+
+    class member.FullMembership {
+              + receptionMessage()
+          }
+
+
+
+
+          class member.GymMembership {
+              + receptionMessage()
+          }
+
+
+
+          abstract class member.Member {
+              + receptionMessage()
+              + setGymAccess()
+              + setPoolAccess()
+              + useGym()
+              + usePool()
+          }
+
+
+
+
+          class member.PoolMembership {
+              + receptionMessage()
+          }
+
+
+
+  access.EnterGym .up.|> access.GymAccess
+  access.EnterPool .up.|> access.PoolAccess
+  access.NoGymEntry .up.|> access.GymAccess
+  access.NoPoolEntry .up.|> access.PoolAccess
+  member.FullMembership -up-|> member.Member
+  member.GymMembership -up-|> member.Member
+  member.Member o-- access.GymAccess
+  member.Member o-- access.PoolAccess
+  member.PoolMembership -up-|> member.Member
+
+
+@enduml
